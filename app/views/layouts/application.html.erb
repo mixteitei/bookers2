@@ -10,18 +10,43 @@
   </head>
 
   <body>
-    <% if user_signed_in? %>
-      <li>
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-      </li>
-    <% else %>
-      <li>
-        <%= link_to "新規登録", new_user_registration_path %>
-      </li>
-      <li>
-        <%= link_to "ログイン", new_user_session_path %>
-      </li>
-    <% end %>
+    <header>
+      <% if user_signed_in? %>
+      <nav>
+        <div>
+          <a href="/"><span>Bookers</span></a>
+          <li>
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+          </li>
+        </div>
+      </nav>
+      <% else %>
+      <nav>
+        <div>
+          <a href="/"><span>Bookers</span></a>
+          <div>
+            <ul>
+              <li>
+                <%= link_to root_path do %>
+                  Home
+                <% end %>
+              </li>
+              <li>
+                <%= link_to new_user_registration_path do %>
+                  Sign up
+                <% end %>
+              </li>
+              <li>
+                <%= link_to new_user_session_path do %>
+                  Log in
+                <% end %>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <% end %>
+    </header>
     <%= yield %>
   </body>
 </html>
