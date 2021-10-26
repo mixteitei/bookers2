@@ -10,34 +10,64 @@
   </head>
 
   <body>
-    <header>
+    <header class="mb-3">
       <% if user_signed_in? %>
-      <nav>
-        <div>
-          <a href="/"><span>Bookers</span></a>
-          <li>
-            <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-          </li>
-        </div>
-      </nav>
-      <% else %>
-      <nav>
-        <div>
-          <a href="/"><span>Bookers</span></a>
-          <div>
-            <ul>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+          <%= link_to root_path, class:"navbar-brand" do %>
+            <span>Bookers</span>
+          <% end %>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
               <li>
-                <%= link_to root_path do %>
+                <%= link_to user_path(current_user.id), class:"fas fa-home nav-link text-light" do %>
                   Home
                 <% end %>
               </li>
               <li>
-                <%= link_to new_user_registration_path do %>
+                <%= link_to users_path, class:"fas fa-users nav-link text-light"  do %>
+                  Users
+                <% end %>
+              </li>
+              <li>
+                <%= link_to books_path, class:"fas fa-book-open nav-link text-light"  do %>
+                  Books
+                <% end %>
+              </li>
+              <li>
+                <%= link_to destroy_user_session_path, class:"fas fa-sign-out-alt nav-link text-light", method: :delete do %>
+                  Log out
+                <% end %>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <% else %>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+          <%= link_to root_path, class:"navbar-brand" do %>
+            <span>Bookers</span>
+          <% end %>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+              <li>
+                <%= link_to root_path, class:"fas fa-home nav-link text-light" do %>
+                  Home
+                <% end %>
+              </li>
+              <li>
+                <%= link_to home_about_path, class:"fas fa-link nav-link text-light" do %>
+                  About
+                <% end %>
+              </li>
+              <li>
+                <%= link_to new_user_registration_path, class:"fas fa-user-plus nav-link text-light" do %>
                   Sign up
                 <% end %>
               </li>
               <li>
-                <%= link_to new_user_session_path do %>
+                <%= link_to new_user_session_path, class:"fas fa-sign-in-alt nav-link text-light" do %>
                   Log in
                 <% end %>
               </li>
@@ -48,5 +78,14 @@
       <% end %>
     </header>
     <%= yield %>
+    <footer>
+      <div class="container mt-5">
+        <div class="row">
+          <div class="mx-auto">
+            <p>CopyRight Infratop.inc</p>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
