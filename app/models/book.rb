@@ -1,4 +1,4 @@
 class Book < ApplicationRecord
   
-  bolong_to :user
+  belongs_to :user
 end
