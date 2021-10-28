@@ -1,6 +1,6 @@
       <div class="col-md-3">
         <h2>User info</h2>
-        <%= attachment_image_tag user,:profile_image_id, :fill, 63, 63, format:'jpeg', class:"attachment user profile_image fallback" %>
+        <%= attachment_image_tag user,:profile_image, :fill, 63, 63, format:'jpeg', class:"attachment user profile_image fallback", fallback:"no_image.jpg", size:"63x63" %>
         <table class="table">
           <tbody>
             <tr>
@@ -14,7 +14,7 @@
           </tbody>
         </table>
         <div class="row">
-          <%= link_to edit_user_path(current_user.id), class:"btn btn-outline-secondary btn-block" do %>
+          <%= link_to edit_user_path(@user.id), class:"btn btn-outline-secondary btn-block" do %>
             <i class="fas fa-user-cog"></i>
           <% end %>
         </div>
