@@ -13,16 +13,16 @@ class BookCommentsController < ApplicationController
     BookComment.find_by(id:params[:id]).destroy
     redirect_to book_path(params[:book_id])
   end
-  
+
   private
-  
+
   def book_comment_params
     params.require(:book_comment).permit(:comment)
   end
-  
+
   def baria_user
     unless
-      BookComment.find_by(id:params[:id]).user == current_user
+      BookComment.find_by(id:params[:id]).user_id == current_user.id
         redirect_to book_path(params[:book_id])
     end
   end
