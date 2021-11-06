@@ -25,6 +25,19 @@ class User < ApplicationRecord
     following_user.include?(user)
   end
 
+  def self.search(search, word)
+    if search == "forward_match"
+      User.where("name LIKE?","#{word}%")
+    elsif search == "backward_match"
+      User.where("name LIKE?","%#{word}")
+    elsif search == "perfect_match"
+      User.where("name LIKE?","#{word}")
+    else
+      User.where("name LIKE?","%#{word}%")
+    end
+  end
+
+
 
   attachment:profile_image
 
