@@ -2,16 +2,17 @@ class BookCommentsController < ApplicationController
   before_action :baria_user, only:[:destroy]
 
   def create
-    book_comment = Book.find(params[:book_id])
+    @detail_book = Book.find(params[:book_id])
     comment = current_user.book_comments.new(book_comment_params)
-    comment.book_id = book_comment.id
+    comment.book_id = @detail_book.id
     comment.save
-    redirect_to book_path(book_comment)
   end
 
   def destroy
-    BookComment.find_by(id:params[:id]).destroy
-    redirect_to book_path(params[:book_id])
+    book_comment = BookComment.find_by(id:params[:id])
+    book_comment.destroy
+    @detail_book = Book.find(book_comment.book.id)
+    render :create
   end
 
   private

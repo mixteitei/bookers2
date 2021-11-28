@@ -25,6 +25,7 @@ class BooksController < ApplicationController
     @detail_book = Book.find(params[:id])
     @user = @detail_book.user
     @book_comment = BookComment.new
+    @book_comments = @detail_book.book_comments.order(created_at: :desc)
   end
 
   def edit
@@ -52,12 +53,12 @@ class BooksController < ApplicationController
   def book_params
     params.require(:book).permit(:title, :body)
   end
-  
+
   def baria_book
     unless Book.find(params[:id]).user_id == current_user.id
       redirect_to books_path
     end
   end
-  
+
 end
 
